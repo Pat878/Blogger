@@ -23,6 +23,12 @@ class AuthorsController < ApplicationController
 
 before_filter :require_login, except: [:new, :create]
 
+def require_login
+    unless logged_in?
+      flash[:error] = "You must be logged in to access this section"
+    end
+  end
+
   # GET /authors/new
   def new
     @author = Author.new

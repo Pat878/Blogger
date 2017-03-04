@@ -1,6 +1,14 @@
 class ArticlesController < ApplicationController
   include ArticlesHelper
 
+  before_filter :require_login, except: [:index, :show]
+
+  def require_login
+      unless logged_in?
+        flash[:error] = "You must be logged in to access this section"
+      end
+    end
+
   def index
     @articles = Article.all
   end
