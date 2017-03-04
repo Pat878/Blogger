@@ -21,6 +21,8 @@ class AuthorsController < ApplicationController
     end
   end
 
+before_filter :require_login, except: [:new, :create]
+
   # GET /authors/new
   def new
     @author = Author.new
